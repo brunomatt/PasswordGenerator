@@ -1,5 +1,7 @@
 import random #imports pseudo-random function random.choice()
 
+length_satisfied = False
+
 number = list(range(0,10)) #creates 0,1,2,...,9 list
 
 def lowercaseAlphabets(): #creates lowercase_alphabet list
@@ -55,8 +57,14 @@ def password_generator(characters): #generates passwords until criteria is match
         else:
             continue
 
-try:
-    password_length = int(input("Let's generate a secure and random password for you.  How many characters would you like your password to be?  "))
-    password_generator(password_length)
-except ValueError:
-    print("You can only enter integers here.")
+while length_satisfied is False:
+    try:
+        password_length = int(input("Let's generate a secure and random password for you.\n"
+                                "How many characters would you like your password to be? (Must be at least 3):  "))
+        if password_length > 2:
+            password_generator(password_length)
+            length_satisfied = True
+        else:
+            print("Password must be at least 3 characters long.  Please try again.\n")
+    except ValueError:
+        print("You can only enter integers here.")
